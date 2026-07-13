@@ -264,6 +264,11 @@ contract DigitalWillTest is Test {
             0 // salt
         );
 
+        // Enable precompiles to trigger scheduler call
+        vm.startPrank(owner);
+        willAgent.setBypass(false);
+        vm.stopPrank();
+
         digitalWill.triggerDistribution(willId);
     }
 

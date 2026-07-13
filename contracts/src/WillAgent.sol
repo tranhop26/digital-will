@@ -198,21 +198,25 @@ contract WillAgent {
 
                     // Step 4: Schedule multi-block transfer using system Scheduler
                     // Priority fee MUST be >= 1 gwei (1000000000 wei)
-                    try IScheduler(scheduler).schedule(
-                        200000,                  // gasLimit
-                        20 * 10**9,              // maxGasPrice (20 gwei)
-                        1 * 10**9,               // priorityFee (1 gwei)
-                        1,                       // frequency (every block)
-                        block.number + 1,        // startBlock
-                        block.number + 2,        // endBlock
-                        ritualWallet,            // target (calls RitualWallet to execute payHeir)
-                        0,                       // value
-                        abi.encodeWithSignature("execute(address,uint256,bytes)", ledgerAddress, 0, payload),
-                        uint256(keccak256(abi.encodePacked(block.timestamp, heir, token, j))) // salt
-                    ) returns (uint256 jobId) {
-                        emit StepExecuted("Scheduler_Scheduled", false);
-                    } catch {
-                        emit PrecompileFailed(scheduler, "Scheduler failed");
+                    if (!bypassPrecompiles) {
+                        try IScheduler(scheduler).schedule(
+                            200000,                  // gasLimit
+                            20 * 10**9,              // maxGasPrice (20 gwei)
+                            1 * 10**9,               // priorityFee (1 gwei)
+                            1,                       // frequency (every block)
+                            block.number + 1,        // startBlock
+                            block.number + 2,        // endBlock
+                            ritualWallet,            // target (calls RitualWallet to execute payHeir)
+                            0,                       // value
+                            abi.encodeWithSignature("execute(address,uint256,bytes)", ledgerAddress, 0, payload),
+                            uint256(keccak256(abi.encodePacked(block.timestamp, heir, token, j))) // salt
+                        ) returns (uint256 jobId) {
+                            emit StepExecuted("Scheduler_Scheduled", false);
+                        } catch {
+                            emit PrecompileFailed(scheduler, "Scheduler failed");
+                        }
+                    } else {
+                        emit StepExecuted("Scheduler_Bypassed", true);
                     }
 
                     // Step 5: Execute transfer immediately via RitualWallet
