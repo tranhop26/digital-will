@@ -396,17 +396,21 @@ async function toggleBypassPrecompiles() {
 
 // Update UI elements based on connection status
 function updateUI() {
-  const btnConnect = document.getElementById('btn-connect');
+  const btnConnects = document.querySelectorAll('.btn-connect');
   const networkStatus = document.getElementById('network-status');
   const networkIndicator = document.getElementById('network-indicator');
 
   if (userAddress) {
-    btnConnect.innerText = `${userAddress.substring(0, 6)}...${userAddress.substring(38)}`;
+    btnConnects.forEach(btn => {
+      btn.innerText = `${userAddress.substring(0, 6)}...${userAddress.substring(38)}`;
+    });
     networkStatus.innerText = "Ritual Connected";
     networkIndicator.style.backgroundColor = "var(--success)";
     networkIndicator.style.boxShadow = "0 0 10px var(--success)";
   } else {
-    btnConnect.innerText = "Connect Wallet";
+    btnConnects.forEach(btn => {
+      btn.innerText = "Connect Wallet";
+    });
     networkStatus.innerText = "Ritual Testnet";
     networkIndicator.style.backgroundColor = "var(--accent-cyan)";
     networkIndicator.style.boxShadow = "0 0 10px var(--accent-cyan)";

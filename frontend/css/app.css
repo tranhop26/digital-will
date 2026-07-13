@@ -386,4 +386,36 @@ body {
   .sidebar-nav {
     flex-direction: row;
   }
+  .sidebar #btn-connect {
+    display: none !important;
+  }
+}
+
+/* App Header (Top Bar with Connect Wallet button) */
+.app-header {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background: rgba(2, 6, 23, 0.4);
+  backdrop-filter: blur(var(--card-blur));
+  -webkit-backdrop-filter: blur(var(--card-blur));
+  border: 1px solid var(--border-muted);
+  border-radius: var(--card-radius);
+  margin-bottom: var(--primitive-space-sm);
+  z-index: 10;
+}
+
+.app-title {
+  font-family: var(--primitive-font-display);
+  font-weight: 700;
+  font-size: 20px;
+  color: white;
+}
+
+@media (max-width: 1024px) {
+  .app-header {
+    margin-top: 10px;
+  }
 }
