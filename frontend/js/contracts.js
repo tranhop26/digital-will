@@ -34,9 +34,9 @@ const WILL_AGENT_ABI = [
 ];
 
 // Placeholders for contract deployment addresses (updated after deploying)
-let DIGITAL_WILL_ADDRESS = "";
-let WILL_AGENT_ADDRESS = "";
-let WILL_LEDGER_ADDRESS = "";
+let DIGITAL_WILL_ADDRESS = "0x243A9A1ab9F96EFdaB527216AA0CF337181D9e45";
+let WILL_AGENT_ADDRESS = "0x14955188e8312F4dED56A8A831E8340963a8d63e";
+let WILL_LEDGER_ADDRESS = "0x7D6Cd89686f7520b4028749f6Ff56300035FC48d";
 
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
