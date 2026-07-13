@@ -64,6 +64,7 @@ async function connectWallet() {
     }
 
     if (typeof updateUI === 'function') updateUI();
+    if (typeof loadWills === 'function') await loadWills();
     if (typeof logActivity === 'function') {
       logActivity(`Wallet connected: ${userAddress.substring(0, 6)}...${userAddress.substring(38)}`, "success");
     }
@@ -89,6 +90,7 @@ if (window.ethereum) {
       provider = new ethers.JsonRpcProvider(PUBLIC_RPC);
     }
     if (typeof updateUI === 'function') updateUI();
+    if (typeof loadWills === 'function') await loadWills();
     if (typeof logActivity === 'function') {
       logActivity(userAddress ? `Account changed: ${userAddress.substring(0, 6)}...` : "Wallet disconnected", "warning");
     }
