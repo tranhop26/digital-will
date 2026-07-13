@@ -44,7 +44,7 @@ async function connectWallet() {
 
     // Check chain and switch to Ritual Testnet
     const currentChainId = await window.ethereum.request({ method: 'eth_chainId' });
-    if (currentChainId !== CHAIN_CONFIG.chainId) {
+    if (currentChainId.toLowerCase() !== CHAIN_CONFIG.chainId.toLowerCase()) {
       try {
         await window.ethereum.request({
           method: "wallet_switchEthereumChain",
@@ -96,7 +96,7 @@ if (window.ethereum) {
 
   window.ethereum.on("chainChanged", (chainId) => {
     console.log("MetaMask chain changed:", chainId);
-    if (chainId !== CHAIN_CONFIG.chainId) {
+    if (chainId.toLowerCase() !== CHAIN_CONFIG.chainId.toLowerCase()) {
       alert("Network changed. Reconnecting to Ritual Testnet...");
     }
     // Safest reset as requested by user
