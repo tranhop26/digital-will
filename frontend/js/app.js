@@ -19,7 +19,7 @@ function addHeirRow() {
   newRow.className = 'heir-input-row';
   newRow.innerHTML = `
     <input type="text" class="form-control heir-address" placeholder="Heir Address (0x...)" required>
-    <input type="number" class="form-control heir-share" placeholder="Share (BPS)" value="3000" min="1" max="10000" required>
+    <input type="number" class="form-control heir-share" placeholder="Share (%)" value="30" min="1" max="100" required>
     <input type="number" class="form-control heir-condition" placeholder="Condition Code (uint)" value="0" required>
     <button type="button" class="btn-remove" onclick="removeHeirRow(this)">✕</button>
   `;
@@ -67,7 +67,7 @@ function loadDemoWillData() {
     row.className = 'heir-input-row';
     row.innerHTML = `
       <input type="text" class="form-control heir-address" placeholder="Heir Address (0x...)" value="${h.address}" required>
-      <input type="number" class="form-control heir-share" placeholder="Share (BPS)" value="${h.share}" min="1" max="10000" required>
+      <input type="number" class="form-control heir-share" placeholder="Share (%)" value="${h.share / 100}" min="1" max="100" required>
       <input type="number" class="form-control heir-condition" placeholder="Condition Code (uint)" value="${h.condition}" required>
       <button type="button" class="btn-remove" onclick="removeHeirRow(this)">✕</button>
     `;
@@ -93,7 +93,7 @@ function loadRandomWillData() {
     row.className = 'heir-input-row';
     row.innerHTML = `
       <input type="text" class="form-control heir-address" placeholder="Heir Address (0x...)" value="${randomAddr}" required>
-      <input type="number" class="form-control heir-share" placeholder="Share (BPS)" value="${h.share * 100}" min="1" max="10000" required>
+      <input type="number" class="form-control heir-share" placeholder="Share (%)" value="${h.share}" min="1" max="100" required>
       <input type="number" class="form-control heir-condition" placeholder="Condition Code (uint)" value="0" required>
       <button type="button" class="btn-remove" onclick="removeHeirRow(this)">✕</button>
     `;
@@ -277,7 +277,8 @@ async function handleCreateWill(event) {
   const deposit = parseFloat(document.getElementById('will-deposit').value);
 
   const heirAddresses = Array.from(document.querySelectorAll('.heir-address')).map(el => el.value);
-  const heirShares = Array.from(document.querySelectorAll('.heir-share')).map(el => parseInt(el.value));
+  // Multiply percentage by 100 to convert to BPS (e.g. 50% -> 5000 BPS)
+  const heirShares = Array.from(document.querySelectorAll('.heir-share')).map(el => parseInt(el.value) * 100);
   const heirConditions = Array.from(document.querySelectorAll('.heir-condition')).map(el => parseInt(el.value));
 
   logActivity("Deploying on-chain Will...", "info");
