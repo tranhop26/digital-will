@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <linearGradient id="purple-cyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7c3aed" />
+      <stop offset="100%" stop-color="#06b6d4" />
+    </linearGradient>
+  </defs>
+  <!-- Scale background shape -->
+  <rect x="10" y="10" width="80" height="80" rx="20" fill="url(#purple-cyan)" opacity="0.15" stroke="url(#purple-cyan)" stroke-width="2" />
+  <!-- Scale central balance beam -->
+  <line x1="30" y1="40" x2="70" y2="40" stroke="url(#purple-cyan)" stroke-width="4" stroke-linecap="round" />
+  <line x1="50" y1="30" x2="50" y2="70" stroke="url(#purple-cyan)" stroke-width="4" stroke-linecap="round" />
+  <!-- Scales pans -->
+  <path d="M30 40 L20 60 L40 60 Z" fill="none" stroke="url(#purple-cyan)" stroke-width="3" stroke-linejoin="round" />
+  <path d="M70 40 L60 60 L80 60 Z" fill="none" stroke="url(#purple-cyan)" stroke-width="3" stroke-linejoin="round" />
+  <!-- Stand base -->
+  <line x1="35" y1="70" x2="65" y2="70" stroke="url(#purple-cyan)" stroke-width="5" stroke-linecap="round" />
+</svg>

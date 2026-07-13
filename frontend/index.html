@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Will -- Trustless AI Dead Man's Switch on Ritual</title>
+  <!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+  <!-- Vanilla CSS for Landing Page -->
+  <link rel="stylesheet" href="css/landing.css">
+  <!-- GSAP CDN for smooth entrance animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
+  <!-- Ambient background glow elements -->
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+
+  <!-- Header / Navigation -->
+  <header class="glass">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">⚖️</span>
+        <span class="logo-text">Digital Will</span>
+      </a>
+      <nav>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#features">Features</a>
+        <a href="#tech-stack">Tech Stack</a>
+        <a href="app.html" class="btn btn-primary btn-sm">Launch App</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-container">
+      <h1 class="hero-title">
+        <span class="gradient-text-purple">Digital Will</span><br>
+        <span class="gradient-text-cyan">AI Dead Man's Switch</span>
+      </h1>
+      <p class="hero-subtitle">
+        Securing your digital legacy with absolute mathematical <strong>Trust</strong> and military-grade <strong>Security</strong>. Powered by a sovereign <strong>AI Coprocessor</strong> running on the Ritual Network, your assets are encrypted via FHE and distributed automatically to heirs upon prolonged inactivity, leaving no room for human failure.
+      </p>
+      <div class="hero-ctas">
+        <a href="app.html" class="btn btn-primary">Launch Dashboard</a>
+        <a href="https://github.com" target="_blank" class="btn btn-secondary">View on GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section id="how-it-works" class="section">
+    <h2 class="section-title">Autonomous Workflow</h2>
+    <div class="steps-grid">
+      <!-- Step 1 -->
+      <div class="step-card glass">
+        <div class="step-num">1</div>
+        <h3>Set Up Your Legacy</h3>
+        <p>Define your heirs, assign asset shares, and set TEE-attested KYC criteria. Your data is encrypted using homomorphic FHE to ensure complete privacy.</p>
+      </div>
+      <!-- Step 2 -->
+      <div class="step-card glass">
+        <div class="step-num">2</div>
+        <h3>Sovereign Heartbeat</h3>
+        <p>Maintain your active status simply by interacting with your dApp. A simple on-chain ping resets your block-timer instantly.</p>
+      </div>
+      <!-- Step 3 -->
+      <div class="step-card glass">
+        <div class="step-num">3</div>
+        <h3>AI Agent Distribution</h3>
+        <p>If your silent threshold passes, the persistent AI Agent auto-decrypts your division matrix on-chain and schedules bulletproof multi-block transfers.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="section">
+    <h2 class="section-title">Core Security Features</h2>
+    <div class="features-grid">
+      <!-- Feature 1 -->
+      <div class="feature-card glass">
+        <div class="feature-icon">💓</div>
+        <h3>Heartbeat Monitor</h3>
+        <p>Ritual's millisecond block timestamps monitor inactivity precisely down to the block.</p>
+      </div>
+      <!-- Feature 2 -->
+      <div class="feature-card glass">
+        <div class="feature-icon">🤖</div>
+        <h3>AI-Powered Coprocessor</h3>
+        <p>A persistent AI Agent runs validation steps using the LLM precompile (0x0802).</p>
+      </div>
+      <!-- Feature 3 -->
+      <div class="feature-card glass">
+        <div class="feature-icon">🔒</div>
+        <h3>Homomorphic Privacy</h3>
+        <p>Your heir's distribution percentages are cryptographically encrypted using FHE (0x0807).</p>
+      </div>
+      <!-- Feature 4 -->
+      <div class="feature-card glass">
+        <div class="feature-icon">🌐</div>
+        <h3>Multi-Asset Escrow</h3>
+        <p>Supports native ETH, ERC-20 tokens, and ERC-721 NFTs stored in a secure smart contract escrow ledger.</p>
+      </div>
+      <!-- Feature 5 -->
+      <div class="feature-card glass">
+        <div class="feature-icon">⚡</div>
+        <h3>Attested Scheduler</h3>
+        <p>Uses Ritual's enshrined Scheduler precompile to perform fail-safe, multi-block transfers.</p>
+      </div>
+      <!-- Feature 6 -->
+      <div class="feature-card glass">
+        <div class="feature-icon">📜</div>
+        <h3>TEE Execution</h3>
+        <p>All operations are attested inside Trusted Execution Environments (TEEs) on Ritual.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tech Stack Section -->
+  <section id="tech-stack" class="section">
+    <h2 class="section-title">Powered By</h2>
+    <div class="tech-grid">
+      <div class="tech-item glass">
+        <h3>Ritual Network</h3>
+        <p>AI Coprocessor Chain</p>
+      </div>
+      <div class="tech-item glass">
+        <h3>Foundry</h3>
+        <p>Smart Contract Tooling</p>
+      </div>
+      <div class="tech-item glass">
+        <h3>Solidity</h3>
+        <p>EVM++ Smart Contracts</p>
+      </div>
+      <div class="tech-item glass">
+        <h3>MetaMask</h3>
+        <p>Web3 Identity & Wallet</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="glass">
+    <div class="footer-container">
+      <p>&copy; 2026 Digital Will DApp. Deployed on Ritual Testnet (Chain ID 1979).</p>
+      <div class="footer-links">
+        <a href="https://github.com" target="_blank">GitHub</a>
+        <a href="https://vercel.com" target="_blank">Vercel</a>
+        <a href="https://ritual.net" target="_blank">Ritual Network</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- GSAP Animation Scripts -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Entrance animations for Hero
+      gsap.from(".hero-title", { opacity: 0, y: 40, duration: 1.2, ease: "power3.out" });
+      gsap.from(".hero-subtitle", { opacity: 0, y: 30, duration: 1.2, delay: 0.3, ease: "power3.out" });
+      gsap.from(".hero-ctas", { opacity: 0, y: 20, duration: 1.2, delay: 0.5, ease: "power3.out" });
+
+      // Staggered reveal for step cards
+      gsap.from(".step-card", {
+        opacity: 0,
+        y: 40,
+        duration: 1,
+        stagger: 0.2,
+        delay: 0.6,
+        ease: "power2.out"
+      });
+      
+      // Feature cards stagger reveal
+      gsap.from(".feature-card", {
+        opacity: 0,
+        y: 30,
+        duration: 0.8,
+        stagger: 0.15,
+        delay: 0.8,
+        ease: "power2.out"
+      });
+    });
+  </script>
+</body>
+</html>

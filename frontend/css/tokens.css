@@ -1,0 +1,108 @@
+/* Design Tokens CSS -- 3-Layer Token Architecture */
+
+:root {
+  /* ==========================================================================
+     1. PRIMITIVE TOKENS (Base variables)
+     ========================================================================== */
+  
+  /* Color Palette */
+  --primitive-purple-500: #7c3aed;
+  --primitive-purple-600: #6d28d9;
+  --primitive-purple-700: #5b21b6;
+  
+  --primitive-cyan-400: #22d3ee;
+  --primitive-cyan-500: #06b6d4;
+  --primitive-cyan-600: #0891b2;
+  
+  --primitive-slate-900: #0f172a;
+  --primitive-slate-950: #020617;
+  
+  --primitive-gray-100: #f3f4f6;
+  --primitive-gray-400: #9ca3af;
+  --primitive-gray-800: #1f2937;
+  --primitive-gray-900: #111827;
+
+  --primitive-green-500: #10b981;
+  --primitive-yellow-500: #f59e0b;
+  --primitive-red-500: #ef4444;
+
+  /* Spacing Scale */
+  --primitive-space-xs: 4px;
+  --primitive-space-sm: 8px;
+  --primitive-space-md: 16px;
+  --primitive-space-lg: 24px;
+  --primitive-space-xl: 32px;
+  --primitive-space-2xl: 48px;
+
+  /* Border Radius */
+  --primitive-radius-sm: 6px;
+  --primitive-radius-md: 10px;
+  --primitive-radius-lg: 16px;
+  --primitive-radius-xl: 24px;
+
+  /* Fonts */
+  --primitive-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --primitive-font-display: 'Outfit', var(--primitive-font-sans);
+
+  /* Shadows */
+  --primitive-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --primitive-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --primitive-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+
+
+  /* ==========================================================================
+     2. SEMANTIC TOKENS (Meaning-based mappings)
+     ========================================================================== */
+  
+  /* Brand colors */
+  --color-primary: var(--primitive-purple-500);
+  --color-primary-hover: var(--primitive-purple-600);
+  --color-secondary: var(--primitive-cyan-500);
+  --color-secondary-hover: var(--primitive-cyan-600);
+
+  /* Feedback Colors */
+  --color-success: var(--primitive-green-500);
+  --color-warning: var(--primitive-yellow-500);
+  --color-danger: var(--primitive-red-500);
+
+  /* UI Backgrounds & Borders */
+  --bg-app: var(--primitive-slate-950);
+  --bg-surface: rgba(255, 255, 255, 0.03);
+  --bg-surface-hover: rgba(255, 255, 255, 0.05);
+  --border-muted: rgba(255, 255, 255, 0.08);
+  --border-active: rgba(124, 58, 237, 0.4);
+
+  /* Typography Roles */
+  --text-main: var(--primitive-gray-100);
+  --text-muted: var(--primitive-gray-400);
+
+  /* Layout Spacers */
+  --space-layout-sm: var(--primitive-space-md);
+  --space-layout-md: var(--primitive-space-lg);
+  --space-layout-lg: var(--primitive-space-xl);
+
+
+  /* ==========================================================================
+     3. COMPONENT TOKENS (Specific element styling override hook)
+     ========================================================================== */
+
+  /* Button Token Set */
+  --btn-radius: var(--primitive-radius-md);
+  --btn-shadow: var(--primitive-shadow-md);
+  
+  /* Card Token Set */
+  --card-bg: var(--bg-surface);
+  --card-border: var(--border-muted);
+  --card-radius: var(--primitive-radius-lg);
+  --card-blur: 16px;
+
+  /* Input Token Set */
+  --input-bg: rgba(255, 255, 255, 0.02);
+  --input-border: var(--border-muted);
+  --input-radius: var(--primitive-radius-md);
+  --input-focus-border: var(--color-primary);
+
+  /* Table / List Token Set */
+  --table-border: var(--border-muted);
+  --table-header-bg: rgba(255, 255, 255, 0.02);
+}

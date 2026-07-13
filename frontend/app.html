@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Will Dashboard -- Ritual Network</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/app.css">
+  <!-- Ethers.js v6 CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6/dist/ethers.umd.min.js"></script>
+</head>
+<body>
+  <!-- Ambient Background Glow -->
+  <div style="position: absolute; width: 400px; height: 400px; background: rgba(124, 58, 237, 0.05); border-radius: 50%; filter: blur(100px); top: 0; left: 0; pointer-events: none; z-index: 0;"></div>
+  <div style="position: absolute; width: 400px; height: 400px; background: rgba(6, 182, 212, 0.05); border-radius: 50%; filter: blur(100px); bottom: 0; right: 0; pointer-events: none; z-index: 0;"></div>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">⚖️</span>
+      <span class="logo-text">Digital Will</span>
+    </a>
+    
+    <div class="status-badge">
+      <div class="status-indicator" id="network-indicator"></div>
+      <span id="network-status">Ritual Testnet</span>
+    </div>
+
+    <div class="sidebar-nav">
+      <a href="#" class="active" onclick="switchTab('dashboard')">📊 Dashboard</a>
+      <a href="#" onclick="switchTab('create')">📝 Create Will</a>
+      <a href="index.html">🏠 Home Page</a>
+    </div>
+
+    <button class="btn btn-primary" id="btn-connect" onclick="connectWallet()" style="margin-top: auto; width: 100%;">Connect Wallet</button>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    
+    <!-- Left Column: Will List & Creation Form -->
+    <div class="dashboard-center">
+      
+      <!-- Tab 1: Dashboard / Active Wills -->
+      <div id="tab-dashboard" class="tab-content">
+        <div class="panel">
+          <div class="panel-title">
+            <span>Active Wills</span>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn-secondary btn-sm" onclick="loadDemoWillData()">Load Demo Will</button>
+              <button class="btn btn-secondary btn-sm" onclick="loadRandomWillData()">Random Will</button>
+            </div>
+          </div>
+          <div class="will-list" id="wills-container">
+            <!-- Dynamic or mock wills list will be populated here -->
+            <p style="color: var(--text-muted); font-size: 14px; text-align: center;">No active wills found. Connect wallet or load demo data.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2: Create New Will Form -->
+      <div id="tab-create" class="tab-content" style="display: none;">
+        <div class="panel">
+          <div class="panel-title">Create New Will</div>
+          <form id="create-will-form" onsubmit="handleCreateWill(event)">
+            
+            <div class="form-group">
+              <label for="will-timeout">Heartbeat Timeout (Seconds)</label>
+              <input type="number" id="will-timeout" class="form-control" placeholder="e.g. 86400 (1 day)" value="86400" required>
+              <span style="font-size: 11px; color: var(--text-muted); margin-top: 4px; display: block;">
+                If you do not ping the contract within this duration, the AI Agent will trigger distribution.
+              </span>
+            </div>
+
+            <!-- Heir Manager -->
+            <div class="form-group">
+              <label>Heirs Allocation & Conditions</label>
+              <div id="heirs-container">
+                <!-- Row 1 -->
+                <div class="heir-input-row">
+                  <input type="text" class="form-control heir-address" placeholder="Heir Address (0x...)" required>
+                  <input type="number" class="form-control heir-share" placeholder="Share (BPS)" value="5000" min="1" max="10000" required>
+                  <input type="number" class="form-control heir-condition" placeholder="Condition Code (uint)" value="0" required>
+                  <button type="button" class="btn-remove" onclick="removeHeirRow(this)">✕</button>
+                </div>
+              </div>
+              <button type="button" class="btn btn-secondary btn-sm" onclick="addHeirRow()" style="margin-top: 8px;">+ Add Heir</button>
+            </div>
+
+            <!-- Assets Manager -->
+            <div class="form-group">
+              <label>Deposit Initial Capital (ETH)</label>
+              <input type="number" id="will-deposit" class="form-control" placeholder="Amount of ETH to deposit" value="0.5" step="0.01" min="0">
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">Deploy On-Chain Will</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right Column: Activity Log & Simulations -->
+    <div class="dashboard-right">
+      
+      <!-- Simulation / Interactive Demo Control -->
+      <div class="panel">
+        <div class="panel-title">Simulation Controls</div>
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 8px;">Simulate owner inactivity ("I'm Inactive") or trigger heartbeat ping.</p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+              <button class="btn btn-primary btn-sm" onclick="simulatePing()">Send Ping</button>
+              <button class="btn btn-danger btn-sm" onclick="simulateInactivity()">I'm Inactive</button>
+            </div>
+          </div>
+          <hr style="border: 0; border-top: 1px solid var(--border-glass);">
+          <div>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 8px;">Toggle bypassPrecompiles mode on the contract (bypass Ritual TEE precompiles if they aren't fully deployed on testnet).</p>
+            <button class="btn btn-secondary btn-sm" id="btn-toggle-bypass" onclick="toggleBypassPrecompiles()" style="width: 100%;">Toggle Precompile Bypass</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Activity Log -->
+      <div class="panel">
+        <div class="panel-title">Activity Log</div>
+        <div class="activity-log" id="activity-log-container">
+          <div class="log-item"><div class="log-time">System</div>DApp interface initialized in read-only mode.</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- JavaScript Scripts -->
+  <script src="js/contracts.js"></script>
+  <script src="js/mockData.js"></script>
+  <script src="js/web3.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

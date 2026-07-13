@@ -1,0 +1,17 @@
+# Foundry
+out/
+cache/
+broadcast/
+docs/
+
+# Node
+node_modules/
+.vercel
+
+# Env
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
