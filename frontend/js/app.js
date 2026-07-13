@@ -195,7 +195,7 @@ function displayMockWills() {
       <div class="will-details">
         <div>Owner: <span>${will.owner.substring(0, 6)}...${will.owner.substring(38)}</span></div>
         <div>Last Ping: <span>${new Date(will.lastPing).toLocaleString()}</span></div>
-        <div>Days Until Trigger: <span>${will.daysUntilTrigger} days</span></div>
+        <div>Time Until Trigger: <span class="countdown-timer" data-deadline="${will.lastPing + 30 * 86400 * 1000}" data-active="${will.status === 'Active'}">Calculating...</span></div>
         <div>Timeout: <span>30 days</span></div>
       </div>
       <div style="margin: 8px 0; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 8px;">
@@ -250,7 +250,7 @@ function renderWillCard(will) {
     <div class="will-details">
       <div>Owner: <span>${will.owner.substring(0, 6)}...${will.owner.substring(38)}</span></div>
       <div>Last Ping: <span>${new Date(will.lastPing).toLocaleString()}</span></div>
-      <div>Hours Until Trigger: <span>${will.active ? hoursRemaining + ' hrs' : '0'}</span></div>
+      <div>Time Until Trigger: <span class="countdown-timer" data-deadline="${will.lastPing + will.timeout * 1000}" data-active="${will.active}">Calculating...</span></div>
       <div>Timeout: <span>${will.timeout}s</span></div>
     </div>
     <div style="margin: 8px 0; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 8px;">
@@ -422,3 +422,44 @@ function updateUI() {
 function initShowcaseData() {
   displayMockWills();
 }
+
+// Start a global countdown ticking interval
+function startGlobalCountdown() {
+  setInterval(() => {
+    document.querySelectorAll('.countdown-timer').forEach(el => {
+      const active = el.getAttribute('data-active') === 'true';
+      if (!active) {
+        el.innerText = "Distributed";
+        el.style.color = "var(--color-warning)";
+        return;
+      }
+      
+      const deadline = parseInt(el.getAttribute('data-deadline'));
+      const now = Date.now();
+      const diff = deadline - now;
+      
+      if (diff <= 0) {
+        el.innerText = "Expired (AI Agent Trigger Ready)";
+        el.style.color = "var(--color-danger)";
+        el.style.fontWeight = "bold";
+      } else {
+        const secs = Math.floor(diff / 1000) % 60;
+        const mins = Math.floor(diff / (1000 * 60)) % 60;
+        const hours = Math.floor(diff / (1000 * 60 * 60)) % 24;
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        
+        let displayStr = "";
+        if (days > 0) displayStr += `${days}d `;
+        if (hours > 0 || days > 0) displayStr += `${hours}h `;
+        if (mins > 0 || hours > 0 || days > 0) displayStr += `${mins}m `;
+        displayStr += `${secs}s`;
+        
+        el.innerText = displayStr;
+        el.style.color = "var(--accent-cyan)";
+      }
+    });
+  }, 1000);
+}
+
+// Start immediately on script execution
+startGlobalCountdown();
